@@ -1,11 +1,21 @@
 import Feature from '../features/feature/Feature'
 import { textsData } from '../datas/Texts'
-import Customer from '../features/customer/customer'
+import { customerData } from '../datas/Customer'
+import Customer from '../features/customer/Customer'
 
 const Homepage = () => {
     return (
         <main>
-            <Customer />
+            {customerData.map((text, index) => (
+                <Customer 
+                    key={index}  // Add a key for each element
+                    title={text.title}
+                    subtitleOne={text.subtitleOne}
+                    subtitleTwo={text.subtitleTwo}
+                    subtitleThree={text.subtitleThree}
+                    text={text.text}
+                /> 
+            ))}
             <section className="features">
                 <h2 className="sr-only">Features</h2>
                 {textsData.map((text, index) => {
