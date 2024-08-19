@@ -1,7 +1,11 @@
+// react
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { authSlice } from '../features/auth/authSlice'
-import { userSlice } from '../features/user/userSlice'
 
+// components
+import { authSlice } from '../components/auth/AuthSlice'
+import { userSlice } from '../components/user/UserSlice'
+
+// initialize state
 const state = {}
 
 const store = configureStore({

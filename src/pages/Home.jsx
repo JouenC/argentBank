@@ -1,7 +1,9 @@
-import Feature from '../features/feature/Feature'
-import { textsData } from '../datas/Texts'
-import { customerData } from '../datas/Customer'
-import Customer from '../features/customer/Customer'
+// data
+import { textsData, customerData } from '../datas/Texts'
+
+//component
+import Feature from '../components/feature/Feature'
+import Customer from '../components/customer/Customer'
 
 const Homepage = () => {
     return (

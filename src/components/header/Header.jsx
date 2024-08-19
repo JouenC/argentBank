@@ -1,8 +1,13 @@
+// react
 import { Link, NavLink } from 'react-router-dom'
-import ArgentBankLogo from '../assets/argentBankLogo.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAuthConnected, logout } from '../features/auth/authSlice'
-import { emptyUserData, getUserData } from '../features/user/userSlice'
+
+// asset
+import ArgentBankLogo from '../../assets/argentBankLogo.png'
+
+// components
+import { getAuthConnected, logout } from '../auth/AuthSlice'
+import { emptyUserData, getUserData } from '../user/UserSlice'
 
 export default function Header() {
     const dispatch = useDispatch()

@@ -3,14 +3,19 @@ import React from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
 
-// pages and components
+// store
 import store from "./app/store";
-import Header from './components/Header';
+
+// pages
 import Home from './pages/Home';
 import Login from "./pages/Login";
-import SafeRoute from "./utils/safeRoute/SafeRoute";
 import ErrorPage from "./pages/ErrorPage";
-import Footer from "./components/Footer";
+import Customer from "./pages/Customer";
+
+// components
+import Header from './components/header/Header';
+import SafeRoute from "./utils/safeRoute/SafeRoute";
+import Footer from "./components/footer/Footer";
 
 // style
 import '../src/style/main.css';
@@ -28,7 +33,7 @@ export default function App() {
               path="/profile"
               element={
                 <SafeRoute>
-                  <div>"Youpi!"</div>
+                  <div><Customer /></div>
                 </SafeRoute>
               } />
             <Route path="*" element={<ErrorPage />} />

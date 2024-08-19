@@ -1,15 +1,20 @@
+// react
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import { getAuthConnected } from '../../features/auth/authSlice'
 
+// component
+import { getAuthConnected } from '../../components/auth/AuthSlice'
+
+// protect child element
 const SafeRoute = ({ children }) => {
     const isAuth = useSelector(getAuthConnected)
-    console.log(isAuth)
 
+    // if not authenticated, returns to login
     if (!isAuth) {
         return <Navigate to="/login" replace />
     }
 
+    // if authenticated,
     return children
 }
 

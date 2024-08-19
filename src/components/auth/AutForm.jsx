@@ -1,12 +1,15 @@
+// react
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { changeUserCredentials, getAuthError, getAuthStatus, getUserToken } from './authSlice'
+
+// component
+import { changeUserCredentials, getAuthError, getAuthStatus, getUserToken } from './AuthSlice'
 import Loader from '../../utils/loader/Loader'
 
 export default function AuthForm() {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const dispatch = useDispatch() // Used to send Redux actions
+    const navigate = useNavigate() // Used for navigation after authentication
     const localStorageEmail = localStorage.getItem('email')
     const localStoragePassword = localStorage.getItem('password')
     const [credentials, setCredentials] = useState({
@@ -15,9 +18,11 @@ export default function AuthForm() {
     })
     const [rememberMe, setRememberMe] = useState(true)
 
+    // global state selection
     const authError = useSelector(getAuthError)
     const authStatus = useSelector(getAuthStatus)
 
+    // reverse the state
     const handleRememberMe = () => {
         setRememberMe(!rememberMe)
     }
@@ -85,4 +90,4 @@ export default function AuthForm() {
             {content}
         </form>
     )
-}
+};

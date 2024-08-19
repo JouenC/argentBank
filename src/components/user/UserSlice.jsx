@@ -1,4 +1,4 @@
-
+// react
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
@@ -11,6 +11,7 @@ const initialState = {
     updatedAt: '',
 }
 
+// POST request to API to retrieve user profile information
 export const fetchUserData = createAsyncThunk(
     'user/getUserData',
     async (token) => {
@@ -23,6 +24,7 @@ export const fetchUserData = createAsyncThunk(
     }
 )
 
+// PUT request is sent to the API to update the user profile with new data
 export const updateUserData = createAsyncThunk(
     'user/updateUserData',
     async (data) => {
@@ -71,8 +73,8 @@ export const userSlice = createSlice({
 // selectors
 export const getUserData = (state) => state.user
 
-//actions
+// actions
 export const { emptyUserData } = userSlice.actions
 
-//reducers
+// reducers
 export const userReducer = userSlice.reducer

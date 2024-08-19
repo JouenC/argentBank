@@ -1,6 +1,8 @@
+// react
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
+// initial state of the authentication slice
 const initialState = {
     credentials: '',
     token: '',
@@ -11,6 +13,7 @@ const initialState = {
 
 const BASE_URL = 'http://localhost:3001/api/v1/user/login'
 
+// POST request to obtain an authentication token
 export const getUserToken = createAsyncThunk(
     'auth/getUserToken',
     async (credentials, { rejectWithValue }) => {
