@@ -39,6 +39,7 @@ export const updateUserData = createAsyncThunk(
     }
 )
 
+// user state management
 export const userSlice = createSlice({
     name: 'user',
     initialState,

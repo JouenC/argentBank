@@ -1,0 +1,198 @@
+openapi: 3.0.3
+info:
+  title: Bank Argent API
+  description: Contains all available API endpoints
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001
+tags:
+  - name: all user transactions
+    description: all transactions for a month
+  - name: single user transaction
+    description: one transaction
+paths:
+  /user/transactions:
+    get:
+      tags:
+        - all user transactions
+      summary: Transaction
+      description: getting all transactions for the current month
+      parameters:
+        - name: mounth
+          in: query
+          description: The month for which to retrieve the transactions (the current month)
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of transactions for the specified month
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transactions'
+        '400':
+          description: Invalid request
+        '404':
+          description: Transactions not found
+  /user/transactions/{transactionId}:
+    get:
+      tags:
+        - single user transaction
+      summary: Transaction
+      description: Retrieve details of a specific transaction
+      operationId: getTransactionById
+      parameters:
+        - name: transactionId
+          in: path
+          description: Transaction identifier
+          required: true
+          schema:
+            type: integer
+        - name: month
+          in: query
+          description: The month for which to retrieve the transaction
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Transaction details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transactions'
+        '400':
+          description: Invalid request
+        '404':
+          description: Transaction not found
+  /user/transactions/{transactionId}/metadata:
+    put:
+      tags:
+        - single user transaction data
+      summary: Update an existing transaction
+      description: Update an existing transaction by Id
+      operationId: updateTransaction
+      parameters:
+        - name: transactionId
+          in: path
+          description: Transaction identifier
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Update an existent transaction
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Transactions'
+        required: true
+      responses:
+        '200':
+          description: Transaction successfully updated
+        '400':
+          description: Invalid request
+        '404':
+          description: Transaction not found
+    delete:
+      tags:
+        - single user transaction data
+      summary: Delete a transaction data
+      description: Delete a transaction
+      operationId: deletTransaction
+      parameters:
+        - name: transactionId
+          in: path
+          description: Transaction id to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Transaction successfully deleted
+        '400':
+          description: Invalid transaction value
+        '404':
+          description: Transaction not found
+components:
+  schemas:
+    Transactions:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Login of the transaction
+        month:
+          type: string
+          description: The month of the transaction
+        date:
+          type: string
+          format: date
+          description: Date of the transaction
+        description:
+          type: string
+          description: Description of the transaction
+        amount:
+          type: number
+          format: float
+          description: Amount of the transaction
+        balance:
+          type: number
+          format: float
+          description: Account balance after transaction
+      required:
+        - date
+        - description
+        - amount
+        - balance
+    User:
+      properties:
+        email:
+          type: string
+          description: user email
+        password:
+          type: string
+          description: user password
+        firstName:
+          type: string
+          description: user first name
+        lastName:
+          type: string
+          description: user last name
+    Login:
+      properties:
+        email:
+          type: string
+          description: user email
+        password:
+          type: string
+          description: user password
+    ApiResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        body:
+          type: object
+          properties:
+            id:
+              type: string
+            email:
+              type: string
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+    UserProfile:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
