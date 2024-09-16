@@ -51,6 +51,7 @@ export const userSlice = createSlice({
             state.id = ''
             state.createdAt = ''
             state.updatedAt = ''
+            state.error = null
         },
     },
     extraReducers: (builder) => {
@@ -62,11 +63,27 @@ export const userSlice = createSlice({
                 state.id = payload.id
                 state.createdAt = payload.createdAt
                 state.updatedAt = payload.updatedAt
+                state.error = null
+            })
+            .addCase(fetchUserData.rejected, (state, action) => {
+                if (action.payload === 'ERR_NETWORK') {
+                    state.error = 'Le serveur est inaccessible. Veuillez vérifier votre connexion réseau.';
+                } else {
+                    state.error = 'Une erreur s\'est produite lors de la récupération des données utilisateur.';
+                }
             })
             .addCase(updateUserData.fulfilled, (state, { payload }) => {
                 state.firstName = payload.firstName
                 state.lastName = payload.lastName
                 state.updatedAt = payload.updatedAt
+                state.error = null
+            })
+            .addCase(updateUserData.rejected, (state, action) => {
+                if (action.payload === 'ERR_NETWORK') {
+                    state.error = 'Le serveur est inaccessible. Impossible de mettre à jour les données utilisateur.';
+                } else {
+                    state.error = 'Une erreur s\'est produite lors de la mise à jour des données utilisateur.';
+                }
             })
     },
 })

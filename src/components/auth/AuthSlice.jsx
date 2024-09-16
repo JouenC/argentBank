@@ -46,11 +46,13 @@ export const authSlice = createSlice({
             .addCase(getUserToken.pending, (state) => {
                 state.status = 'loading'
                 state.connected = false
+                state.error = null
             })
             .addCase(getUserToken.fulfilled, (state, { payload }) => {
                 state.status = 'succeeded'
                 state.token = payload.body.token
                 state.connected = true
+                state.error = null
             })
             .addCase(getUserToken.rejected, (state, action) => {
                 state.status = 'failed'
