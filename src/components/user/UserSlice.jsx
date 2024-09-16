@@ -51,6 +51,7 @@ export const userSlice = createSlice({
             state.id = ''
             state.createdAt = ''
             state.updatedAt = ''
+            state.error = null
         },
     },
     extraReducers: (builder) => {
@@ -62,11 +63,13 @@ export const userSlice = createSlice({
                 state.id = payload.id
                 state.createdAt = payload.createdAt
                 state.updatedAt = payload.updatedAt
+                state.error = null
             })
             .addCase(updateUserData.fulfilled, (state, { payload }) => {
                 state.firstName = payload.firstName
                 state.lastName = payload.lastName
                 state.updatedAt = payload.updatedAt
+                state.error = null
             })
     },
 })
